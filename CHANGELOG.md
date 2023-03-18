@@ -6,3 +6,7 @@
 
 * Fix alignment of indicator and connectors
 * add `padding` support for connector of indicators
+
+## 0.0.3
+
+* support `physics` for scroll, default it `NeverScrollableScrollPhysics`

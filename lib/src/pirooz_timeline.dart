@@ -12,11 +12,12 @@ class PiroozTimeline extends StatelessWidget {
   final int flex;
   final ConnectorStyle connectorStyle;
   final IndicatorAlignment indicatorAlignment;
-
+  final ScrollPhysics? scrollPhysics;
   const PiroozTimeline({
     super.key,
     required this.models,
     required this.indicatorBuilder,
+    this.scrollPhysics,
     this.indicatorAlignment = IndicatorAlignment.center,
     required this.widgetBuilder,
     required this.flex,
@@ -29,6 +30,7 @@ class PiroozTimeline extends StatelessWidget {
     return ListView.builder(
       itemCount: models.length,
       shrinkWrap: true,
+      physics: scrollPhysics ?? const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return _PiroozTile(
           connectorStyle: connectorStyle,

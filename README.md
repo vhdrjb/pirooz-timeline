@@ -48,6 +48,7 @@ PiroozTimeline(flex: 5,
 - `indicatorAlignment` : enum that contains three `top`,`bottom` and `center` alignment for indicator.
 - `indicatorBuilder`: a builder that gives you the model and index of the model, and you can create different indicators
   base on model `runtimeType` or index of it.
+- `physics` : scrolling physics. Default is `NeverScrollableScrollPhysics`
 - `connectorStyle`: Style of vertical dashes contains following properties:
     - `color` : color of dashes
     - `dashSpace` : space between dashes
