@@ -71,10 +71,15 @@ class _PiroozTile extends StatelessWidget {
         return IntrinsicHeight(
           child: Row(
             children: [
-              Flexible(
+              Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [_showBefore(), indicator, _showAfter()],
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _showBefore(),
+                    Container(alignment: const Alignment(-1, 0), child: indicator),
+                    _showAfter()
+                  ],
                 ),
               ),
               Expanded(flex: flex, child: child)
@@ -92,12 +97,16 @@ class _PiroozTile extends StatelessWidget {
     if (isFirst) {
       if (connectorStyle.showLineBeforeFirst) {
         return Expanded(
-          child: CustomPaint(
-            painter: _DashLinePainter(
-                dashSpace: connectorStyle.dashSpace,
-                dashHeight: connectorStyle.dashHeight,
-                dashColor: connectorStyle.dashColor),
-            size: Size(connectorStyle.width, double.infinity),
+          child: Container(
+            padding: connectorStyle.padding,
+            alignment: const Alignment(-1, 0),
+            child: CustomPaint(
+              painter: _DashLinePainter(
+                  dashSpace: connectorStyle.dashSpace,
+                  dashHeight: connectorStyle.dashHeight,
+                  dashColor: connectorStyle.dashColor),
+              size: Size(connectorStyle.width, double.infinity),
+            ),
           ),
         );
       } else {
@@ -111,12 +120,16 @@ class _PiroozTile extends StatelessWidget {
       }
     } else {
       return Expanded(
-        child: CustomPaint(
-          painter: _DashLinePainter(
-              dashColor: connectorStyle.dashColor,
-              dashSpace: connectorStyle.dashSpace,
-              dashHeight: connectorStyle.dashHeight),
-          size: Size(connectorStyle.width, double.infinity),
+        child: Container(
+          padding: connectorStyle.padding,
+          alignment: const Alignment(-1, 0),
+          child: CustomPaint(
+            painter: _DashLinePainter(
+                dashColor: connectorStyle.dashColor,
+                dashSpace: connectorStyle.dashSpace,
+                dashHeight: connectorStyle.dashHeight),
+            size: Size(connectorStyle.width, double.infinity),
+          ),
         ),
       );
     }
@@ -129,12 +142,16 @@ class _PiroozTile extends StatelessWidget {
     if (isLast) {
       if (connectorStyle.showLineAfterLast) {
         return Expanded(
-          child: CustomPaint(
-            painter: _DashLinePainter(
-                dashColor: connectorStyle.dashColor,
-                dashSpace: connectorStyle.dashSpace,
-                dashHeight: connectorStyle.dashHeight),
-            size: Size(connectorStyle.width, double.infinity),
+          child: Container(
+            padding: connectorStyle.padding,
+            alignment: const Alignment(-1, 0),
+            child: CustomPaint(
+              painter: _DashLinePainter(
+                  dashColor: connectorStyle.dashColor,
+                  dashSpace: connectorStyle.dashSpace,
+                  dashHeight: connectorStyle.dashHeight),
+              size: Size(connectorStyle.width, double.infinity),
+            ),
           ),
         );
       } else {
@@ -148,12 +165,16 @@ class _PiroozTile extends StatelessWidget {
       }
     } else {
       return Expanded(
-          child: CustomPaint(
-        painter: _DashLinePainter(
-            dashColor: connectorStyle.dashColor,
-            dashSpace: connectorStyle.dashSpace,
-            dashHeight: connectorStyle.dashHeight),
-        size: Size(connectorStyle.width, double.infinity),
+          child: Container(
+        padding: connectorStyle.padding,
+        alignment: const Alignment(-1, 0),
+        child: CustomPaint(
+          painter: _DashLinePainter(
+              dashColor: connectorStyle.dashColor,
+              dashSpace: connectorStyle.dashSpace,
+              dashHeight: connectorStyle.dashHeight),
+          size: Size(connectorStyle.width, double.infinity),
+        ),
       ));
     }
   }

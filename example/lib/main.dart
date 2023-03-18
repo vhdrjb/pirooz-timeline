@@ -12,24 +12,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-          body: Center(
-              child: PiroozTimeline(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        body: Center(
+            child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: PiroozTimeline(
             flex: 5,
-            indicatorAlignment: IndicatorAlignment.top,
+            indicatorAlignment: IndicatorAlignment.bottom,
             indicatorBuilder: (model, index) {
               if (model is A) {
                 return Container(
@@ -49,81 +51,31 @@ class MyApp extends StatelessWidget {
               }
             },
             connectorStyle: const ConnectorStyle(
-              color: Colors.amber,
-              dashSpace: 4,
-              dashHeight: 5,
-            ),
+                color: Colors.amber,
+                dashSpace: 4,
+                padding: const EdgeInsets.only(left: 25),
+                dashHeight: 5,
+                ),
             models: const [],
             widgetBuilder: (PiroozModel model, int index) {
               if (model is A) {
-                return _Indicator(time: model.value,icon: "",);
+                return Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: Text((model as A).value),
+                );
               } else if (model is C) {
                 return const Divider(
                   thickness: 2,
                 );
               } else {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(50),
                   child: Text((model as B).valaue),
                 );
               }
             },
-          )),
-        ));
-  }
-}
-
-class _Indicator extends StatelessWidget {
-  final String icon;
-  final String time;
-
-  const _Indicator({Key? key, required this.icon, required this.time})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
-      height: 55,
-      child: Stack(
-        children: [
-          Positioned(
-            right: 10,
-            left: 20,
-            top: 0,
-            bottom: 0,
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    color: Colors.green,
-                    borderRadius:
-                        BorderRadius.horizontal(right: Radius.circular(10))),
-                child: Text(
-                  time,
-                  textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.white),
-                ),
-              ),
-            ),
           ),
-          Positioned(
-            left: 0,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child: const Icon(Icons.ac_unit),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.green),
-                  color: Colors.green,
-                  shape: BoxShape.circle),
-            ),
-          )
-        ],
+        )),
       ),
     );
   }

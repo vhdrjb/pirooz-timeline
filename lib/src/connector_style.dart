@@ -7,15 +7,15 @@ class ConnectorStyle {
   final bool showLineBeforeFirst;
   final double dashSpace;
   final double dashHeight;
-  final double ratio;
+  final EdgeInsets? padding;
 
   const ConnectorStyle(
       {double? width,
       double? dashHeight,
       double? dashSpace,
       Color? color,
+      this.padding,
       this.showLineAfterLast = false,
-      this.ratio = 0.5,
       this.showLineBeforeFirst = false})
       : dashColor = color ?? Colors.grey,
         dashSpace = dashSpace ?? 2,
