@@ -1,6 +1,5 @@
 /// Flutter Customizable Timeline
 
-
 library pirooz_timeline;
 
 export 'src/connector_style.dart';

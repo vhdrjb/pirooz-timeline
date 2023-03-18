@@ -7,6 +7,7 @@ class ConnectorStyle {
   final bool showLineBeforeFirst;
   final double dashSpace;
   final double dashHeight;
+  final double ratio;
 
   const ConnectorStyle(
       {double? width,
@@ -14,6 +15,7 @@ class ConnectorStyle {
       double? dashSpace,
       Color? color,
       this.showLineAfterLast = false,
+      this.ratio = 0.5,
       this.showLineBeforeFirst = false})
       : dashColor = color ?? Colors.grey,
         dashSpace = dashSpace ?? 2,

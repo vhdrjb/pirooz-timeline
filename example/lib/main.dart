@@ -56,15 +56,7 @@ class MyApp extends StatelessWidget {
             models: const [],
             widgetBuilder: (PiroozModel model, int index) {
               if (model is A) {
-                return Container(
-                  decoration: BoxDecoration(color: Colors.red),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(model.value),
-                    ],
-                  ),
-                );
+                return _Indicator(time: model.value,icon: "",);
               } else if (model is C) {
                 return const Divider(
                   thickness: 2,
@@ -78,6 +70,62 @@ class MyApp extends StatelessWidget {
             },
           )),
         ));
+  }
+}
+
+class _Indicator extends StatelessWidget {
+  final String icon;
+  final String time;
+
+  const _Indicator({Key? key, required this.icon, required this.time})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      height: 55,
+      child: Stack(
+        children: [
+          Positioned(
+            right: 10,
+            left: 20,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius:
+                        BorderRadius.horizontal(right: Radius.circular(10))),
+                child: Text(
+                  time,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: const Icon(Icons.ac_unit),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.green),
+                  color: Colors.green,
+                  shape: BoxShape.circle),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
