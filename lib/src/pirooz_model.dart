@@ -1,3 +1,6 @@
 abstract class PiroozModel {
-  const PiroozModel();
+  final bool ignorePrevious;
+  final bool ignoreNext;
+
+  const PiroozModel({this.ignorePrevious = true, this.ignoreNext = true});
 }

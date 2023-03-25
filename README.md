@@ -61,7 +61,7 @@ PiroozTimeline(flex: 5,
       seperated in two part, before indicator and after indicator. By setting this property `true` dash after indicator
       will be shown
     - `padding` : padding of connectors
-- `models` : list of item's that should be displayed in timeline. Each model should be subtype of `PiroozModel`
+- `models` : list of item's that should be displayed in timeline. Each model should be subtype of `PiroozModel`. If previous or next indicator of models should be ignored, it can be handled by `ignoreNext` and `ignorePrevious` parameter. 
 - `widgetBuilder` : a builder that gives you the model and index of the model, and you can create different items base
   on model `runtimeType` or index of it.
 

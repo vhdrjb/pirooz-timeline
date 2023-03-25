@@ -13,6 +13,7 @@ class PiroozTimeline extends StatelessWidget {
   final ConnectorStyle connectorStyle;
   final IndicatorAlignment indicatorAlignment;
   final ScrollPhysics? scrollPhysics;
+
   const PiroozTimeline({
     super.key,
     required this.models,
@@ -38,8 +39,8 @@ class PiroozTimeline extends StatelessWidget {
           indicatorAlignment: indicatorAlignment,
           flex: flex,
           indicator: indicatorBuilder.call(models[index], index),
-          isFirst: index == 0,
-          isLast: index == models.length - 1,
+          ignorePrevious: index == 0 || models[index].ignorePrevious,
+          ignoreNext: index == models.length - 1 || models[index].ignoreNext,
           child: widgetBuilder.call(models[index], index),
         );
       },
@@ -48,8 +49,8 @@ class PiroozTimeline extends StatelessWidget {
 }
 
 class _PiroozTile extends StatelessWidget {
-  final bool isFirst;
-  final bool isLast;
+  final bool ignorePrevious;
+  final bool ignoreNext;
   final Widget indicator;
   final Widget child;
   final int flex;
@@ -58,11 +59,11 @@ class _PiroozTile extends StatelessWidget {
 
   const _PiroozTile(
       {super.key,
-      required this.isFirst,
+      required this.ignorePrevious,
       required this.indicator,
       required this.child,
       required this.flex,
-      required this.isLast,
+      required this.ignoreNext,
       required this.connectorStyle,
       required this.indicatorAlignment});
 
@@ -79,7 +80,8 @@ class _PiroozTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     _showBefore(),
-                    Container(alignment: const Alignment(-1, 0), child: indicator),
+                    Container(
+                        alignment: const Alignment(-1, 0), child: indicator),
                     _showAfter()
                   ],
                 ),
@@ -96,7 +98,7 @@ class _PiroozTile extends StatelessWidget {
     if (indicatorAlignment == IndicatorAlignment.top) {
       return Container();
     }
-    if (isFirst) {
+    if (ignorePrevious) {
       if (connectorStyle.showLineBeforeFirst) {
         return Expanded(
           child: Container(
@@ -141,7 +143,7 @@ class _PiroozTile extends StatelessWidget {
     if (indicatorAlignment == IndicatorAlignment.bottom) {
       return Container();
     }
-    if (isLast) {
+    if (ignoreNext) {
       if (connectorStyle.showLineAfterLast) {
         return Expanded(
           child: Container(
